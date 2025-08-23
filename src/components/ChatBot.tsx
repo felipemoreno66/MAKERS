@@ -24,20 +24,12 @@ const ChatBot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
 
-  // Mock responses - in real app this would connect to n8n workflow
-  const mockResponses = [
-    "I'd be happy to help you with that! Let me check our current inventory...",
-    "Great question! Based on our catalog, here's what I found...",
-    "I can provide detailed specifications for that product. Which specific features are you interested in?",
-    "Our current pricing includes free shipping on orders over $500. Would you like to know more about our deals?",
-    "That product is currently in stock! Would you like me to add it to your cart or provide more details?"
-  ];
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputValue,
@@ -46,19 +38,66 @@ const ChatBot = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputValue;
     setInputValue('');
+    setIsLoading(true);
 
-    // Simulate bot response after a delay
-    setTimeout(() => {
-      const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+    try {
+      // Send message to n8n webhook
+      const response = await fetch('https://hit667366.app.n8n.cloud/webhook-test/919813eb-9ab9-44aa-becf-3bf471a63067', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          timestamp: new Date().toISOString(),
+          source: 'makers-tech-chatbot'
+        }),
+      });
+
+      let botResponseText = "I'm here to help! Let me process your request...";
+
+      if (response.ok) {
+        try {
+          const data = await response.json();
+          // If the webhook returns a response message, use it
+          if (data.response || data.message || data.reply) {
+            botResponseText = data.response || data.message || data.reply;
+          }
+        } catch (jsonError) {
+          // If response is not JSON, use default message
+          console.log('Non-JSON response received');
+        }
+      } else {
+        botResponseText = "I'm having trouble connecting right now. Please try again in a moment.";
+      }
+
+      // Add bot response
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
+        text: botResponseText,
         sender: 'bot',
         timestamp: new Date()
       };
+
       setMessages(prev => [...prev, botMessage]);
-    }, 1000);
+
+    } catch (error) {
+      console.error('Error sending message to webhook:', error);
+      
+      // Add error message
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm having trouble connecting right now. Please try again in a moment.",
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -127,10 +166,14 @@ const ChatBot = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask about products, prices, or specs..."
-                className="flex-1 bg-secondary/50 border-border/50 focus:border-primary"
+                disabled={isLoading}
               />
-              <Button type="submit" size="icon" className="flex-shrink-0">
-                <Send className="w-4 h-4" />
+              <Button type="submit" size="icon" className="flex-shrink-0" disabled={isLoading}>
+                {isLoading ? (
+                  <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
               </Button>
             </form>
           </CardContent>
