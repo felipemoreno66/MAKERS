@@ -56,22 +56,15 @@ const ChatBot = () => {
         }),
       });
 
-      let botResponseText = "I'm here to help! Let me process your request...";
-
-      if (response.ok) {
-        try {
-          const data = await response.json();
-          // If the webhook returns a response message, use it
-          if (data.response || data.message || data.reply) {
-            botResponseText = data.response || data.message || data.reply;
-          }
-        } catch (jsonError) {
-          // If response is not JSON, use default message
-          console.log('Non-JSON response received');
-        }
-      } else {
-        botResponseText = "I'm having trouble connecting right now. Please try again in a moment.";
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const data = await response.json();
+      
+      // Use the webhook response directly
+      const botResponseText = data.response || data.message || data.reply || data.text || 
+                             "I received your message but couldn't generate a response.";
 
       // Add bot response
       const botMessage: Message = {
