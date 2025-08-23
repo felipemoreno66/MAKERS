@@ -45,7 +45,7 @@ const ChatBot = () => {
 
     try {
       // Send message to n8n webhook
-      const response = await fetch('https://hit667366.app.n8n.cloud/webhook-test/919813eb-9ab9-44aa-becf-3bf471a63067', {
+      const response = await fetch('https://hit667366.app.n8n.cloud/webhook/919813eb-9ab9-44aa-becf-3bf471a63067', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
