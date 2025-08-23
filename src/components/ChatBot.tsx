@@ -23,6 +23,7 @@ const ChatBot = () => {
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +53,8 @@ const ChatBot = () => {
         body: JSON.stringify({
           message: currentMessage,
           timestamp: new Date().toISOString(),
-          source: 'makers-tech-chatbot'
+          source: 'makers-tech-chatbot',
+          sessionId: sessionId
         }),
       });
 
