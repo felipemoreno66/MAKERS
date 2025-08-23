@@ -14,6 +14,7 @@ interface Message {
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [sessionId] = useState(() => Date.now().toString() + Math.random().toString(36).substr(2, 9));
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -52,7 +53,8 @@ const ChatBot = () => {
         body: JSON.stringify({
           message: currentMessage,
           timestamp: new Date().toISOString(),
-          source: 'makers-tech-chatbot'
+          source: 'makers-tech-chatbot',
+          sessionId: sessionId
         }),
       });
 
