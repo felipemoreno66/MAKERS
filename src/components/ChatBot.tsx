@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { MessageCircle, Send, X, Bot, User } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { MessageCircle, Send, X, Bot, User, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -26,6 +27,27 @@ const ChatBot = () => {
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Quick action suggestions for the slider
+  const quickActions = [
+    { id: 1, label: "Ver productos", message: "Muéstrame los productos disponibles" },
+    { id: 2, label: "Consultar precios", message: "¿Cuáles son los precios de los productos?" },
+    { id: 3, label: "Especificaciones", message: "Necesito información técnica de los productos" },
+    { id: 4, label: "Soporte técnico", message: "Necesito ayuda técnica" },
+    { id: 5, label: "Garantías", message: "¿Qué garantías ofrecen?" },
+    { id: 6, label: "Envíos", message: "¿Cómo funcionan los envíos?" }
+  ];
+
+  // Auto-scroll to bottom when new messages are added
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,6 +130,23 @@ const ChatBot = () => {
     }
   };
 
+  const handleQuickAction = (message: string) => {
+    setInputValue(message);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % Math.ceil(quickActions.length / 3));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + Math.ceil(quickActions.length / 3)) % Math.ceil(quickActions.length / 3));
+  };
+
+  const getVisibleActions = () => {
+    const startIndex = currentSlide * 3;
+    return quickActions.slice(startIndex, startIndex + 3);
+  };
+
   return (
     <>
       {/* Chat Toggle Button */}
@@ -138,9 +177,9 @@ const ChatBot = () => {
           </CardHeader>
           
           <CardContent className="flex-1 flex flex-col space-y-4 pb-4">
-            {/* Messages */}
-            <ScrollArea className="flex-1 pr-4">
-              <div className="space-y-3">
+            {/* Messages with enhanced scrollbar */}
+            <ScrollArea className="flex-1 pr-2 max-h-72">
+              <div className="space-y-3 pr-2">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -165,8 +204,50 @@ const ChatBot = () => {
                     </div>
                   </div>
                 ))}
+                {/* Auto-scroll anchor */}
+                <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
+            
+            {/* Quick Actions Slider */}
+            <div className="border-t pt-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-muted-foreground font-medium">Acciones rápidas</span>
+                <div className="flex space-x-1">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={prevSlide}
+                    className="h-6 w-6 p-0"
+                    disabled={quickActions.length <= 3}
+                  >
+                    <ChevronLeft className="w-3 h-3" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={nextSlide}
+                    className="h-6 w-6 p-0"
+                    disabled={quickActions.length <= 3}
+                  >
+                    <ChevronRight className="w-3 h-3" />
+                  </Button>
+                </div>
+              </div>
+              <div className="flex space-x-2 overflow-hidden">
+                {getVisibleActions().map((action, index) => (
+                  <Badge
+                    key={action.id}
+                    variant="secondary"
+                    className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors text-xs px-2 py-1 animate-fade-in"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    onClick={() => handleQuickAction(action.message)}
+                  >
+                    {action.label}
+                  </Badge>
+                ))}
+              </div>
+            </div>
             
             {/* Input */}
             <form onSubmit={handleSendMessage} className="flex space-x-2">
