@@ -62,9 +62,22 @@ const ChatBot = () => {
 
       const data = await response.json();
       
-      // Use the webhook response directly
-      const botResponseText = data.response || data.message || data.reply || data.text || 
-                             "I received your message but couldn't generate a response.";
+      // Parse the webhook response - handle both string and JSON formats
+      let botResponseText = "I received your message but couldn't generate a response.";
+      
+      if (data.output) {
+        try {
+          // Try to parse if it's a JSON string
+          const parsedOutput = JSON.parse(data.output);
+          botResponseText = parsedOutput.response || parsedOutput.message || parsedOutput.reply || data.output;
+        } catch {
+          // If parsing fails, use the output directly
+          botResponseText = data.output;
+        }
+      } else {
+        // Fallback to other possible response fields
+        botResponseText = data.response || data.message || data.reply || data.text || botResponseText;
+      }
 
       // Add bot response
       const botMessage: Message = {
