@@ -151,7 +151,7 @@ const ProductCatalog = ({ onAddToCart }: ProductCatalogProps) => {
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sortedProducts.map((product) => (
-            <Card key={product.id} className="card-product">
+            <Card key={product.id} className="card-product group">
               <CardHeader className="p-0">
                 <div className="relative">
                   <img

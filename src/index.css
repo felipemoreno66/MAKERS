@@ -96,7 +96,7 @@ All colors MUST be HSL.
   }
   
   .card-product {
-    @apply group relative bg-gradient-to-br from-card to-secondary border border-border/30 rounded-xl overflow-hidden;
+    @apply relative bg-gradient-to-br from-card to-secondary border border-border/30 rounded-xl overflow-hidden;
     @apply hover:border-primary/50 hover:shadow-[var(--shadow-elevated)] transition-[var(--transition-smooth)];
     @apply hover:scale-[1.02] transform-gpu;
   }
