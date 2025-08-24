@@ -37,7 +37,7 @@ const mockProducts = [
     rating: 4.7,
     image: "/placeholder.svg",
     description: "Advanced fitness tracking with health monitoring",
-    inStock: false,
+    inStock: true,
     featured: false
   },
   {
