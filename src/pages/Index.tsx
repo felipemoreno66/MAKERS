@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ProductCatalog from '@/components/ProductCatalog';
+import AboutSection from '@/components/AboutSection';
+import ContactSection from '@/components/ContactSection';
 import FloatingCart from '@/components/FloatingCart';
 import ChatBot from '@/components/ChatBot';
 
@@ -77,6 +79,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <ProductCatalog onAddToCart={handleAddToCart} />
+        <AboutSection />
+        <ContactSection />
       </main>
 
       <FloatingCart 
