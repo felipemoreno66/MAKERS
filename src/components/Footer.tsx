@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-secondary/20 border-t border-border/30 py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 pr-20">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
@@ -27,7 +27,7 @@ const Footer = () => {
           <Button 
             variant="ghost" 
             onClick={handleAdminClick}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors mr-16"
           >
             admin
           </Button>
