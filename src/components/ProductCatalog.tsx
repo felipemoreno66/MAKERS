@@ -16,7 +16,7 @@ const mockProducts = [
     image: "/placeholder.svg",
     description: "Ultra-performance laptop with M3 chip and 32GB RAM",
     inStock: true,
-    featured: true
+    featured: false
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const mockProducts = [
     image: "/placeholder.svg",
     description: "Advanced fitness tracking with health monitoring",
     inStock: false,
-    featured: true
+    featured: false
   },
   {
     id: 4,
@@ -71,7 +71,7 @@ const mockProducts = [
     image: "/placeholder.svg",
     description: "Mirrorless camera with 8K video recording",
     inStock: true,
-    featured: true
+    featured: false
   }
 ];
 
