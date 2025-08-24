@@ -37,7 +37,7 @@ const mockProducts = [
     rating: 4.7,
     image: "/placeholder.svg",
     description: "24-inch Screen, 1080p Resolution, IPS Panel",
-    inStock: false,
+    inStock: true,
     featured: false
   },
   {
