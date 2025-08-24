@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   const handleAdminClick = () => {
-    // This could navigate to an admin panel or trigger admin functionality
-    console.log('Admin button clicked');
+    navigate('/auth');
   };
 
   return (
