@@ -14,7 +14,7 @@ const mockProducts = [
     price: 500,
     rating: 4.9,
     image: "/placeholder.svg",
-    description: "Ultra-performance laptop with M3 chip and 32GB RAM",
+    description: "15.6-inch Screen, 8GB RAM, 1TB SSD",
     inStock: true,
     featured: false
   },
@@ -25,7 +25,7 @@ const mockProducts = [
     price: 650,
     rating: 4.8,
     image: "/placeholder.svg",
-    description: "Premium wireless headphones with active noise cancellation",
+    description: "14-inch Screen, 16GB RAM, 512GB SSD",
     inStock: true,
     featured: false
   },
@@ -36,8 +36,8 @@ const mockProducts = [
     price: 150,
     rating: 4.7,
     image: "/placeholder.svg",
-    description: "Advanced fitness tracking with health monitoring",
-    inStock: true,
+    description: "24-inch Screen, 1080p Resolution, IPS Panel",
+    inStock: false,
     featured: false
   },
   {
@@ -47,7 +47,7 @@ const mockProducts = [
     price: 120,
     rating: 4.9,
     image: "/placeholder.svg",
-    description: "Ultimate gaming desktop with RTX 4090 graphics",
+    description: "Laser Printer, WiFi, Monochrome",
     inStock: true,
     featured: false
   },
@@ -58,7 +58,7 @@ const mockProducts = [
     price: 40,
     rating: 4.6,
     image: "/placeholder.svg",
-    description: "Professional 5K monitor for creative workflows",
+    description: "Wireless, 16,000 DPI Sensor, 7 Programmable Buttons",
     inStock: true,
     featured: false
   },
@@ -69,7 +69,7 @@ const mockProducts = [
     price: 650,
     rating: 4.8,
     image: "/placeholder.svg",
-    description: "Mirrorless camera with 8K video recording",
+    description: "8GB RAM, 1TB HDD, 15.6-inch Screen",
     inStock: true,
     featured: false
   }

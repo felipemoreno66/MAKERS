@@ -22,7 +22,7 @@ const Footer = () => {
           
           <div className="text-center md:text-left mb-4 md:mb-0">
             <p className="text-muted-foreground text-sm">
-              © 2024 Makers Tech. Innovation in Technology at Your Fingertips.
+              © 2025 Makers Tech. Innovation in Technology at Your Fingertips.
             </p>
           </div>
           
