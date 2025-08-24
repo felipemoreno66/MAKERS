@@ -25,7 +25,6 @@ const Navigation = ({ cartCount = 0 }: NavigationProps) => {
             <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
             <a href="#products" className="text-foreground hover:text-primary transition-colors">Products</a>
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
           </div>
 
           {/* Search and Cart */}
