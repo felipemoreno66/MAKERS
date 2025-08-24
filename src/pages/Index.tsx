@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ProductCatalog from '@/components/ProductCatalog';
 import AboutSection from '@/components/AboutSection';
+import Footer from '@/components/Footer';
 import FloatingCart from '@/components/FloatingCart';
 import ChatBot from '@/components/ChatBot';
 
@@ -80,6 +81,8 @@ const Index = () => {
         <ProductCatalog onAddToCart={handleAddToCart} />
         <AboutSection />
       </main>
+
+      <Footer />
 
       <FloatingCart 
         items={cartItems}
