@@ -13,7 +13,7 @@ const mockProducts = [
     category: "Computers",
     price: 500,
     rating: 4.9,
-    image: "/placeholder.svg",
+    image: "/products/HP PC.jpg",
     description: "15.6-inch Screen, 8GB RAM, 1TB SSD",
     inStock: true,
     featured: false
@@ -24,7 +24,7 @@ const mockProducts = [
     category: "Computers",
     price: 650,
     rating: 4.8,
-    image: "/placeholder.svg",
+    image: "/products/DELL.jpg",
     description: "14-inch Screen, 16GB RAM, 512GB SSD",
     inStock: true,
     featured: false
@@ -35,7 +35,7 @@ const mockProducts = [
     category: "Monitors",
     price: 150,
     rating: 4.7,
-    image: "/placeholder.svg",
+    image: "/products/LG MONITOR.jpg",
     description: "24-inch Screen, 1080p Resolution, IPS Panel",
     inStock: true,
     featured: false
@@ -46,7 +46,7 @@ const mockProducts = [
     category: "Printers",
     price: 120,
     rating: 4.9,
-    image: "/placeholder.svg",
+    image: "/products/HP PRINTER.jpg",
     description: "Laser Printer, WiFi, Monochrome",
     inStock: true,
     featured: false
@@ -57,7 +57,7 @@ const mockProducts = [
     category: "Gaming",
     price: 40,
     rating: 4.6,
-    image: "/placeholder.svg",
+    image: "/products/RAZER.jpg",
     description: "Wireless, 16,000 DPI Sensor, 7 Programmable Buttons",
     inStock: true,
     featured: false
@@ -68,7 +68,7 @@ const mockProducts = [
     category: "Laptops",
     price: 650,
     rating: 4.8,
-    image: "/placeholder.svg",
+    image: "/products/LENOVO.jpg",
     description: "8GB RAM, 1TB HDD, 15.6-inch Screen",
     inStock: true,
     featured: false
