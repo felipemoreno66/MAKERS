@@ -32,7 +32,7 @@ const mockProducts = [
   {
     id: 3,
     name: "LG Monitor",
-    category: "Gaming",
+    category: "Monitors",
     price: 150,
     rating: 4.7,
     image: "/placeholder.svg",
@@ -75,7 +75,7 @@ const mockProducts = [
   }
 ];
 
-const categories = ["All", "Laptops", "Audio", "Wearables", "Gaming", "Monitors", "Photography"];
+const categories = ["All", "Laptops", "Computers", "Gaming", "Monitors", "Printers"];
 
 interface ProductCatalogProps {
   onAddToCart?: (productId: number) => void;
