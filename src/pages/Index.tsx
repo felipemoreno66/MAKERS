@@ -21,12 +21,12 @@ const Index = () => {
   const handleAddToCart = (productId: number) => {
     // Mock product data - in real app this would come from Supabase
     const products = {
-      1: { name: "HP Computer", price: 500, image: "/placeholder.svg" },
-      2: { name: "Dell Computer", price: 650, image: "/placeholder.svg" },
-      3: { name: "LG Monitor", price: 150, image: "/placeholder.svg" },
-      4: { name: "Logitech Mouse", price: 25, image: "/placeholder.svg" },
-      5: { name: "Corsair Keyboard", price: 75, image: "/placeholder.svg" },
-      6: { name: "HP Printer", price: 4999, image: "/placeholder.svg" },
+      1: { name: "hi Pro 16", price: 2499, image: "/placeholder.svg" },
+      2: { name: "TechPods Max", price: 549, image: "/placeholder.svg" },
+      3: { name: "SmartWatch Ultra", price: 799, image: "/placeholder.svg" },
+      4: { name: "Gaming Beast RTX", price: 3299, image: "/placeholder.svg" },
+      5: { name: "Studio Display 5K", price: 1599, image: "/placeholder.svg" },
+      6: { name: "Camera Pro Max", price: 4999, image: "/placeholder.svg" },
     };
 
     const product = products[productId as keyof typeof products];
