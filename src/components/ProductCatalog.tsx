@@ -9,7 +9,7 @@ import { ShoppingCart, Star, Filter } from 'lucide-react';
 const mockProducts = [
   {
     id: 1,
-    name: "MakerBook Pro 16",
+    name: "HP Computer",
     category: "Laptops",
     price: 2499,
     rating: 4.9,
