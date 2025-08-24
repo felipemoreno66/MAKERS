@@ -68,6 +68,8 @@ const Index = () => {
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  console.log('Index component rendering', { totalItems, cartItems });
+  
   return (
     <div className="min-h-screen bg-background">
       <Navigation cartCount={totalItems} />
