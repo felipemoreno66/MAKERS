@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 interface Product {
   id: number;
@@ -28,17 +28,20 @@ const ProductChart = ({ products }: ProductChartProps) => {
     {
       name: 'In Stock',
       value: products.filter(p => (p.stock || 0) > 10).length,
-      color: 'hsl(var(--accent))'
+      color: 'hsl(142 71% 45%)',
+      fill: 'hsl(142 71% 45%)'
     },
     {
       name: 'Low Stock',
       value: products.filter(p => (p.stock || 0) > 0 && (p.stock || 0) <= 10).length,
-      color: 'hsl(var(--primary))'
+      color: 'hsl(217 91% 60%)',
+      fill: 'hsl(217 91% 60%)'
     },
     {
       name: 'Out of Stock',
       value: products.filter(p => (p.stock || 0) === 0).length,
-      color: 'hsl(var(--destructive))'
+      color: 'hsl(0 84.2% 60.2%)',
+      fill: 'hsl(0 84.2% 60.2%)'
     }
   ];
 
@@ -95,23 +98,50 @@ const ProductChart = ({ products }: ProductChartProps) => {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <PieChart>
                 <Pie
                   data={stockStatusData}
                   cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
+                  cy="45%"
+                  outerRadius={90}
+                  innerRadius={40}
+                  paddingAngle={2}
                   dataKey="value"
                 >
                   {stockStatusData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
                 </Pie>
-                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartTooltip 
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0];
+                      return (
+                        <div className="bg-card border border-border rounded-lg p-3 shadow-lg">
+                          <p className="text-foreground font-medium">{data.payload.name}</p>
+                          <p className="text-primary">{data.value} products</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Legend 
+                  verticalAlign="bottom" 
+                  height={60}
+                  iconType="circle"
+                  wrapperStyle={{
+                    paddingTop: '20px',
+                    fontSize: '14px',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                  formatter={(value, entry) => (
+                    <span style={{ color: 'hsl(var(--foreground))' }}>
+                      {value}: {entry.payload.value} products
+                    </span>
+                  )}
+                />
               </PieChart>
             </ResponsiveContainer>
           </ChartContainer>
